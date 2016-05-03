@@ -1,0 +1,47 @@
+{
+  "name": "virtual-scroll",
+  "version": "1.0.0",
+  "description": "Think of it as UITableView for the DOM elements",
+  "main": "webpack.config.js",
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "babel src --out-dir lib",
+    "build:umd": "webpack src/VirtualScroll.js dist/virtual-scroll.js && NODE_ENV=production webpack src/VirtualScroll.js dist/virtual-scroll.min.js",
+    "lint": "eslint src test",
+    "test": "NODE_ENV=test mocha",
+    "test:watch": "NODE_ENV=test mocha --watch",
+    "test:cov": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha",
+    "prepublish": "npm run lint && npm run test && npm run clean && npm run build && npm run build:umd"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "virtual-scroll"
+  ],
+  "author": "Khaled Garbaya <kgarbaya@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "haha no"
+  },
+  "devDependencies": {
+    "babel": "^5.5.8",
+    "babel-cli": "^6.8.0",
+    "babel-core": "^5.6.18",
+    "babel-eslint": "^3.1.15",
+    "babel-loader": "^5.1.4",
+    "eslint": "^0.23",
+    "eslint-config-airbnb": "0.0.6",
+    "eslint-plugin-react": "^2.3.0",
+    "expect": "^1.6.0",
+    "isparta": "^3.0.3",
+    "mocha": "^2.2.5",
+    "rimraf": "^2.5.2",
+    "webpack": "^1.9.6",
+    "webpack-dev-server": "^1.8.2"
+  },
+  "dependencies": {
+    "invariant": "^2.0.0"
+  }
+}
