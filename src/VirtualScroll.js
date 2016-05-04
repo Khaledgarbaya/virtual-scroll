@@ -74,7 +74,6 @@ export default class VirtualScroll {
     this.rootElement = document.createElement('div');
     this.rootElement.style.width = this.config.root.clientWidth+'px';
     this.rootElement.style.height = this.config.root.clientHeight+'px';
-    //this.rootElement.style.overflow = 'hidden';
 
     this.config.root.style.overflow = 'hidden';
     this.config.root.style.position = 'relative';
@@ -117,7 +116,9 @@ export default class VirtualScroll {
   createRow (index, container) {
     let item = this.config.source[index];
     if (this.config.createItemFn){
-      this.config.createItemFn(item, container);
+      let emptyObject = {};
+      this.config.createItemFn(emptyObject, container);
+      this.config.updateItemFn(emptyObject, container, item);
       let nodeItem = container.lastChild;
       nodeItem.classList.add('vrow');
       nodeItem.style.position = 'absolute';

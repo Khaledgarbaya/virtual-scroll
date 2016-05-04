@@ -72,3 +72,4 @@ let virtualScroll1 = new VirtualScroll({
 * Adding e2e tests
 * CI using Travis CI
 * scroll to a position with animation
+* handling images (only load the visible items)

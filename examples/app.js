@@ -21,7 +21,6 @@ let virtualScroll1 = new VirtualScroll({
   createItemFn: (itemNodes, itemContainer) => {
     // EXAMPLE
     itemNodes.text1 = document.createElement('span');
-    itemNodes.text1.innerHTML = "ITEM Number "+itemNodes.itemId
     itemNodes.text1.style.height = '50px';
     itemNodes.text1.style.borderTop = '1px solid black';
     itemNodes.text1.style.borderBottom = '1px solid black';
@@ -38,7 +37,7 @@ let virtualScroll1 = new VirtualScroll({
    */
   updateItemFn: (itemNodes, itemContainer, itemData) => {
     // EXAMPLE
-    // update itemNodes.text1 with itemData.itemId
+    itemNodes.text1.innerHTML = "ITEM Number "+itemData.itemId
   }
 });
 let virtualScroll2 = new VirtualScroll({
@@ -59,7 +58,7 @@ let virtualScroll2 = new VirtualScroll({
   createItemFn: (itemNodes, itemContainer) => {
     // EXAMPLE
     itemNodes.text1 = document.createElement('span');
-    itemNodes.text1.innerHTML = "ITEM Number "+itemNodes.itemId
+
     itemNodes.text1.style.height = '70px';
     itemNodes.text1.style.borderTop = '1px solid black';
     itemNodes.text1.style.borderBottom = '1px solid black';
@@ -77,6 +76,7 @@ let virtualScroll2 = new VirtualScroll({
   updateItemFn: (itemNodes, itemContainer, itemData) => {
     // EXAMPLE
     // update itemNodes.text1 with itemData.itemId
+    itemNodes.text1.innerHTML = "ITEM Number "+itemData.itemId
   }
 });
 
