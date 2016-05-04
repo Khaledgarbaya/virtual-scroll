@@ -49,20 +49,17 @@ export default class VirtualScroll {
     this.maxBuffer = this.visibleItemsCount * this.itemHeight;
     this.lastScrolled = 0;
     this.rmNodeInterval = setInterval(this.remoDirtyNodes.bind(this), 300);
-
     this._bindEvents();
-    this.onScroll = this.onScroll.bind(this);
   }
   remoDirtyNodes(){
     if (Date.now() - this.lastScrolled > 100) {
-      let badNodes = document.querySelectorAll('[data-rm="1"]');
+      let badNodes = this.rootElement.querySelectorAll('[data-rm="1"]');
       for (let i = 0, l = badNodes.length; i < l; i++) {
         this.rootElement.removeChild(badNodes[i]);
       }
     }
   }
   _bindEvents (){
-    this.config.root.addEventListener('scroll', this.onScroll.bind(this));
     this.config.scroller.addEventListener('scroll-start', this.onScrollBegin.bind(this));
     this.config.scroller.addEventListener('scroll-end', this.onScrollEnd.bind(this));
   }
@@ -72,11 +69,6 @@ export default class VirtualScroll {
   }
   onScrollEnd(data){
     this.info.isScrolling = false;
-  }
-  onScroll (e){
-    let scrollTop = e.target.scrollTop; // Triggers reflow
-    this._scroll(scrollTop);
-    e.preventDefault && e.preventDefault();
   }
   _setupContainer (){
     this.rootElement = document.createElement('div');
