@@ -44,6 +44,7 @@ export default class VerticalScroller {
       this.scrollContainer.removeEventListener('mousemove', this.drag);
       this.scrollContainer.removeEventListener('mouseup', this.release);
     }
+    this.removeAllListener();
   }
   // check what type of event we received and get the right position out of it
   getYPosition (e){
@@ -57,6 +58,9 @@ export default class VerticalScroller {
   scroll (position){
     this.offset = position;
     this.scrollCallback(position);
+    ScrollStore.set ('type', 'on-scroll');
+    // the direction will be set by the scroll start
+    ScrollStore.emitChange('on-scroll');
   }
   autoScroll (){
     let elapsed, delta, newOffset;
@@ -86,13 +90,13 @@ export default class VerticalScroller {
     }
   }
   dispatchScrollEndEvent (){
-    ScrollStore.set ('type', 'SCROLL_END');
-    ScrollStore.emitChange('SCROLL_END');
+    ScrollStore.set ('type', 'scroll-end');
+    ScrollStore.emitChange('scroll-end');
   }
   dispatchScrollStart (direction){
-    ScrollStore.set ('type', 'SCROLL_BEGIN');
+    ScrollStore.set ('type', 'scroll-start');
     ScrollStore.set ('direction', direction);
-    ScrollStore.emitChange('SCROLL_BEGIN');
+    ScrollStore.emitChange('scroll-start');
   }
   bounce (top){
     const finalDestination = top ? this.minOffset : this.maxOffset,
@@ -219,7 +223,8 @@ export default class VerticalScroller {
     ScrollStore.removeListener(type, listener);
   }
   removeAllListener(){
-    ScrollStore.removeAllListeners('SCROLL_END');
-    ScrollStore.removeAllListeners('SCROLL_BEGIN');
+    ScrollStore.removeAllListeners('scroll-end');
+    ScrollStore.removeAllListeners('scroll-start');
+    ScrollStore.removeAllListeners('on-scroll');
   }
 }

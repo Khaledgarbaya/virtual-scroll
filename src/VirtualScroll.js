@@ -30,18 +30,20 @@ export default class VirtualScroll {
     this.config.updateItemFn = (config && config.root) ? config.updateItemFn : null;
     this.rootElement = null;
     // setup the container
-    this._setupContainer();
-    this.config.scroller = (config && config.scroller) ? config.scroller : new VirtualScroller(this.config.root, (position)=>{
-      this._scroll(position);
-    });
-    this.totalRows = this.config.source.length;
+
+    this.config.scroller = (config && config.scroller) ? config.scroller :
+                            new VirtualScroller(this.config.root, this._scroll.bind(this));
+
     // TODO try to get dynamic itemHeight
+    this.totalRows = this.config.source.length;
     this.itemHeight = 50;
     this.visibleItemsCount = Math.ceil(config.root.offsetHeight / this.itemHeight);
     this.cachedItemsLen = this.visibleItemsCount * 3;
+    this._setupContainer();
     this._renderChunk(this.rootElement, 0)
     this.scrollerElement = this._createScroller(this.totalRows*this.itemHeight);
     this.info.height = this.totalRows*this.itemHeight;// estimated for now
+    this.config.scroller.setDimensions(0,this.info.height);
     this.rootElement.appendChild(this.scrollerElement);
     this.lastRepaintY = 0;
     this.maxBuffer = this.visibleItemsCount * this.itemHeight;
@@ -61,8 +63,8 @@ export default class VirtualScroll {
   }
   _bindEvents (){
     this.config.root.addEventListener('scroll', this.onScroll.bind(this));
-    this.config.scroller.addEventListener('SCROLL_BEGIN', this.onScrollBegin.bind(this));
-    this.config.scroller.addEventListener('SCROLL_END', this.onScrollEnd.bind(this));
+    this.config.scroller.addEventListener('scroll-start', this.onScrollBegin.bind(this));
+    this.config.scroller.addEventListener('scroll-end', this.onScrollEnd.bind(this));
   }
   onScrollBegin(data){
     this.info.isScrolling = true;
@@ -151,32 +153,32 @@ export default class VirtualScroll {
   }
   /*Public API*/
 
-  // TODO add documentation plz!
   refresh (){
-
+    this._setupContainer();
+    this._renderChunk(this.rootElement, 0);
   }
   setSource (listSource){
     this.config.source = listSource;
-    refresh();
+    this.refresh();
   }
   destroy (){
-
+    this.config.scroller.destroy();
   }
   remove (){
-
+    this.destroy();
+    this.config.root.removeChild(this.rootElement);
   }
   addEventListener (event, callback){
-
+    this.config.scroller.addEventListener(event, callback);
   }
   removeEventListener (event, callback){
-
+    this.config.scroller.removeEventListener(event, callback);
   }
   scrollTop (duration){
     // TODO addAnimation
-    this._scroll(0);
   }
   scrollBottom (duration){
-    this._scroll(this.totalRows);
+    this._scroll(this.totalRows*this.itemHeight);
   }
   scrollTo (position, duration){
     // TODO add Animation with duration
