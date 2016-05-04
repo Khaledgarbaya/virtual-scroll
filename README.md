@@ -34,7 +34,7 @@ for (let i = 0; i < 3000; i++) listSource.push({ itemId: i });
 let virtualScroll1 = new VirtualScroll({
   // DOMnode the list will be renderd inside
   root: document.getElementsByClassName('NAME_THE_CONTAINER_WHATEVER_YOU_LIKE')[0],
-
+  itemHeight: 50,
   // ARRAY containg all the objects to be displayed inside the list
   source: listSource,
 
