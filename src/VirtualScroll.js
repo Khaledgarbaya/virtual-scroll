@@ -41,6 +41,7 @@ export default class VirtualScroll {
     this.cachedItemsLen = this.visibleItemsCount * 3;
     this._renderChunk(this.rootElement, 0)
     this.scrollerElement = this._createScroller(this.totalRows*this.itemHeight);
+    this.info.height = this.totalRows*this.itemHeight;// estimated for now
     this.rootElement.appendChild(this.scrollerElement);
     this.lastRepaintY = 0;
     this.maxBuffer = this.visibleItemsCount * this.itemHeight;
@@ -60,6 +61,15 @@ export default class VirtualScroll {
   }
   _bindEvents (){
     this.config.root.addEventListener('scroll', this.onScroll.bind(this));
+    this.config.scroller.addEventListener('SCROLL_BEGIN', this.onScrollBegin.bind(this));
+    this.config.scroller.addEventListener('SCROLL_END', this.onScrollEnd.bind(this));
+  }
+  onScrollBegin(data){
+    this.info.isScrolling = true;
+    this.info.direction = data.direction;
+  }
+  onScrollEnd(data){
+    this.info.isScrolling = false;
   }
   onScroll (e){
     let scrollTop = e.target.scrollTop; // Triggers reflow
@@ -122,10 +132,9 @@ export default class VirtualScroll {
   }
   _scroll(position){
     //Update top of the root element
-    // TODO set it back to false when scroll ends
-    this.info.isScrolling = true;
     // translation is faster than chaning top
     // for more info: http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
+    this.info.scrollTop = -position;
     let t = 'translateY(' + (-position) + 'px) translateZ(0)';
     let s = this.rootElement.style;
     s["transform"] = t;

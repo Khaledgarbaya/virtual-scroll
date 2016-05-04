@@ -1,4 +1,6 @@
+import ScrollStore from './store/ScrollStore.js';
 const SCROLLING_TIME_CONSTANT = 525;
+
 export default class VerticalScroller {
   constructor(scrollContainer, scrollCallback) {
     this.scrollContainer = scrollContainer;
@@ -16,7 +18,6 @@ export default class VerticalScroller {
     this.offset = 0;
     this.target = 0;
     this.touchPositions = [];
-
     this._bindEvents();
   }
   _bindEvents (){
@@ -80,9 +81,18 @@ export default class VerticalScroller {
           requestAnimationFrame(this.autoScroll.bind(this));
       } else {
           this.scroll(this.target);
-          console.log('scroll ends');
+          this.dispatchScrollEndEvent();
       }
     }
+  }
+  dispatchScrollEndEvent (){
+    ScrollStore.set ('type', 'SCROLL_END');
+    ScrollStore.emitChange('SCROLL_END');
+  }
+  dispatchScrollStart (direction){
+    ScrollStore.set ('type', 'SCROLL_BEGIN');
+    ScrollStore.set ('direction', direction);
+    ScrollStore.emitChange('SCROLL_BEGIN');
   }
   bounce (top){
     const finalDestination = top ? this.minOffset : this.maxOffset,
@@ -95,7 +105,7 @@ export default class VerticalScroller {
     const delta = this.amplitude * Math.exp(-elapsed / (this.target == finalDestination ? 125 : SCROLLING_TIME_CONSTANT) );
     if ( isBouncingBack && Math.abs(delta) < 2 ) {
         this.scroll(top ? this.minOffset : this.maxOffset);
-        console.log('scroll ends');
+        this.dispatchScrollEndEvent();
         return;
     }
     this.scroll(this.target - delta);
@@ -163,11 +173,12 @@ export default class VerticalScroller {
     for (var i = endPos - 1; i > 0 && this.touchPositions[i].timestamp > (this.touchPositions[endPos].timestamp - 100); i -= 1) {
       startPos = i;
     }
-    const elapsed = this.touchPositions[endPos].timestamp - this.touchPositions[startPos].timestamp;
-    const delta = this.touchPositions[endPos].offset - this.touchPositions[startPos].offset;
+    const elapsed = this.touchPositions[endPos].timestamp - (this.touchPositions[startPos] && this.touchPositions[startPos].timestamp) || 0;
+    const delta = this.touchPositions[endPos].offset - (this.touchPositions[startPos] && this.touchPositions[startPos].offset) || 0;
     const v = -1000 * delta / (1 + elapsed);
-    this.velocity = 0.8 * v + 0.2 * this.velocity;
+    this.dispatchScrollStart(delta>0 ? 1:-1);
 
+    this.velocity = 0.8 * v + 0.2 * this.velocity;
     this.amplitude = 1.0 * this.velocity;
     this.target = Math.round(this.offset + this.amplitude);
     this.timestamp = Date.now();
@@ -197,9 +208,18 @@ export default class VerticalScroller {
   changeScrollPosition (y) {
     this.scroll(y);
   }
-  setDimensions(min, max){
+  setDimensions (min, max){
     this.minOffset = min;
     this.maxOffset = max;
   }
-
+  addEventListener(type, listener){
+    ScrollStore.on(type, listener);
+  }
+  removeEventListener(type, listener){
+    ScrollStore.removeListener(type, listener);
+  }
+  removeAllListener(){
+    ScrollStore.removeAllListeners('SCROLL_END');
+    ScrollStore.removeAllListeners('SCROLL_BEGIN');
+  }
 }
