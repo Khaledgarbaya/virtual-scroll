@@ -40,3 +40,4 @@ let virtualScroll1 = new VirtualScroll({
     // update itemNodes.text1 with itemData.itemId
   }
 });
+window.list = virtualScroll1;
