@@ -11,6 +11,17 @@ Virtual Scroll
 Virtual list that is able to render infinite ammount of DOm element using UITableView techniques and. This is already been done in a lot of ways but Here I am trying to use CSS translate to scroll the container which more performant than changing the top.
 Paul Irish made a great benchmark here http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
 ## Example Usage
+### Getting the library
+```
+git clone https://github.com/Khaledgarbaya/virtual-scroll.git
+```
+```
+cd virtual-scroll
+```
+```
+npm install
+```
+### Code
 ```javascript
 // BASIC INITIALIZATION
 
