@@ -1,14 +1,15 @@
 Virtual Scroll
 =========================
 ```
-_    ___      __              __   _____                 ____
-| |  / (_)____/ /___  ______ _/ /  / ___/______________  / / /
-| | / / / ___/ __/ / / / __ `/ /   \__ \/ ___/ ___/ __ \/ / /
-| |/ / / /  / /_/ /_/ / /_/ / /   ___/ / /__/ /  / /_/ / / /  
-|___/_/_/   \__/\__,_/\__,_/_/   /____/\___/_/   \____/_/_/
+            _    ___      __              __   _____                 ____
+            | |  / (_)____/ /___  ______ _/ /  / ___/______________  / / /
+            | | / / / ___/ __/ / / / __ `/ /   \__ \/ ___/ ___/ __ \/ / /
+            | |/ / / /  / /_/ /_/ / /_/ / /   ___/ / /__/ /  / /_/ / / /  
+            |___/_/_/   \__/\__,_/\__,_/_/   /____/\___/_/   \____/_/_/
 
 ```
-
+Virtual list that is able to render infinite ammount of DOm element using UITableView techniques and. This is already been done in a lot of ways but Here I am trying to use CSS translate to scroll the container which more performant than changing the top.
+Paul Irish made a great benchmark here http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
 ## Example Usage
 ```javascript
 // BASIC INITIALIZATION
@@ -52,3 +53,11 @@ let virtualScroll1 = new VirtualScroll({
 });
 
 ```
+## Improvement/TODO
+
+* Documentation
+* More Unit tests
+* Adding Scrolling using mouse wheel
+* Adding e2e tests
+* CI using Travis CI
+* scroll to a position with animation
