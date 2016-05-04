@@ -6,7 +6,7 @@ export default class VerticalScroller {
 
     // init variables
     this.timestamp = 0;
-    this.minOffset = Number.MIN_SAFE_INTEGER;
+    this.minOffset = 0;
     this.maxOffset = Number.MAX_SAFE_INTEGER;
     this.frame = 0;
     this.velocity = 0;
@@ -68,19 +68,19 @@ export default class VerticalScroller {
             this.scroll(this.minOffset);
             return;
         }
-        bounce(true);
+        this.bounce(true);
       } else if (newOffset > this.maxOffset) {
           if (this.target - delta <= this.maxOffset + 2){
               this.scroll(this.maxOffset);
               return;
           }
-          bounce(false);
-
+        this.bounce(false);
       } else if (delta > 2 || delta < -2) {
           this.scroll(this.target - delta);
           requestAnimationFrame(this.autoScroll.bind(this));
       } else {
           this.scroll(this.target);
+          console.log('scroll ends');
       }
     }
   }
@@ -95,6 +95,7 @@ export default class VerticalScroller {
     const delta = this.amplitude * Math.exp(-elapsed / (this.target == finalDestination ? 125 : SCROLLING_TIME_CONSTANT) );
     if ( isBouncingBack && Math.abs(delta) < 2 ) {
         this.scroll(top ? this.minOffset : this.maxOffset);
+        console.log('scroll ends');
         return;
     }
     this.scroll(this.target - delta);
@@ -102,7 +103,7 @@ export default class VerticalScroller {
     if (isBouncingBack) {
       if (this.target != finalDestination) {
           this.target = finalDestination;
-          this.amplitude = target - offset;
+          this.amplitude = this.target - this.offset;
           this.timestamp = new Date();
       }
 
@@ -113,7 +114,7 @@ export default class VerticalScroller {
 
     requestAnimationFrame(function(){
         this.bounce(top);
-    });
+    }.bind(this));
   }
   tap (e){
     this.pressed = true;

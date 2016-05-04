@@ -122,11 +122,12 @@ export default class VirtualScroll {
   }
   _scroll(position){
     //Update top of the root element
-    if(position<0){
-      position = 0;
-    }
-    var t = 'translateY(' + (-position) + 'px) translateZ(0)';
-    var s = this.rootElement.style;
+    // TODO set it back to false when scroll ends
+    this.info.isScrolling = true;
+    // translation is faster than chaning top
+    // for more info: http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
+    let t = 'translateY(' + (-position) + 'px) translateZ(0)';
+    let s = this.rootElement.style;
     s["transform"] = t;
     s["webkitTransform"] = t;
     s["mozTransform"] = t;
