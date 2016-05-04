@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import VirtualScroller from '../src/VirtualScroller.js';
+import VirtualScroller from '../src/VerticalScroller.js';
 describe('VirtualScroller', () => {
     const virtualScroller = new VirtualScroller({},()=>{});
     it('should have a property called scrollContainer', ()=>{

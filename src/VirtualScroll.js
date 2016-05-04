@@ -24,7 +24,7 @@ export default class VirtualScroll {
   constructor (config) {
     this.config = {};
     this.info= {scrollTop:0, direction:1, height:1, isScrolling:false};
-    this.config.root = (config && config.root) ? config.root : {};
+    this.config.root = (config && config.root) ? config.root : document.createElement('div');
     this.config.source = (config && config.root) ? config.source : [];
     this.config.createItemFn = (config && config.root) ? config.createItemFn : null;
     this.config.updateItemFn = (config && config.root) ? config.updateItemFn : null;
@@ -37,7 +37,7 @@ export default class VirtualScroll {
     // TODO try to get dynamic itemHeight
     this.totalRows = this.config.source.length;
     this.itemHeight = 50;
-    this.visibleItemsCount = Math.ceil(config.root.offsetHeight / this.itemHeight);
+    this.visibleItemsCount = Math.ceil(this.config.root.offsetHeight / this.itemHeight);
     this.cachedItemsLen = this.visibleItemsCount * 3;
     this._setupContainer();
     this._renderChunk(this.rootElement, 0)

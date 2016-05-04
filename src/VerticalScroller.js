@@ -26,7 +26,7 @@ export default class VerticalScroller {
     this.drag = this.drag.bind(this);
     this.release = this.release.bind(this);
 
-    if(this.scrollContainer){
+    if(this.scrollContainer && this.scrollContainer.addEventListener){
       this.scrollContainer.addEventListener('touchstart', this.tap);
       this.scrollContainer.addEventListener('touchmove', this.drag);
       this.scrollContainer.addEventListener('touchend', this.release);
@@ -36,7 +36,7 @@ export default class VerticalScroller {
     }
   }
   destroy (){
-    if(this.scrollContainer){
+    if(this.scrollContainer && this.scrollContainer.addEventListener){
       this.scrollContainer.removeEventListener('touchstart', this.tap);
       this.scrollContainer.removeEventListener('touchmove', this.drag);
       this.scrollContainer.removeEventListener('touchend', this.release);

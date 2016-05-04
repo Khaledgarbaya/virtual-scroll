@@ -38,6 +38,7 @@
     "expect": "^1.6.0",
     "isparta": "^3.0.3",
     "mocha": "^2.2.5",
+    "mock-browser": "^0.92.11",
     "rimraf": "^2.5.2",
     "webpack": "^1.9.6",
     "webpack-dev-server": "^1.8.2"
