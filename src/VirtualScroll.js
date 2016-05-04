@@ -36,7 +36,7 @@ export default class VirtualScroll {
 
     // TODO try to get dynamic itemHeight
     this.totalRows = this.config.source.length;
-    this.itemHeight = 50;
+    this.itemHeight = (config && config.itemHeight) ? config.itemHeight : 50;
     this.visibleItemsCount = Math.ceil(this.config.root.offsetHeight / this.itemHeight);
     this.cachedItemsLen = this.visibleItemsCount * 3;
     this._setupContainer();

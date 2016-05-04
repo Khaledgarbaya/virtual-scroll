@@ -7,7 +7,8 @@ for (let i = 0; i < 3000; i++) listSource.push({ itemId: i });
 let virtualScroll1 = new VirtualScroll({
   // DOMnode the list will be renderd inside
   root: document.getElementsByClassName('list')[0],
-
+  // itemHeight
+  itemHeight: 50,
   // ARRAY containg all the objects to be displayed inside the list
   source: listSource,
 
@@ -44,6 +45,8 @@ let virtualScroll2 = new VirtualScroll({
   // DOMnode the list will be renderd inside
   root: document.getElementsByClassName('list')[1],
 
+  itemHeight: 70,
+
   // ARRAY containg all the objects to be displayed inside the list
   source: listSource,
 
@@ -57,7 +60,7 @@ let virtualScroll2 = new VirtualScroll({
     // EXAMPLE
     itemNodes.text1 = document.createElement('span');
     itemNodes.text1.innerHTML = "ITEM Number "+itemNodes.itemId
-    itemNodes.text1.style.height = '50px';
+    itemNodes.text1.style.height = '70px';
     itemNodes.text1.style.borderTop = '1px solid black';
     itemNodes.text1.style.borderBottom = '1px solid black';
     itemNodes.text1.style.width = '100%';
