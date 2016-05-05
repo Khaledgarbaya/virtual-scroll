@@ -2,7 +2,7 @@ import {EventEmitter} from 'events';
 class ScrollStore extends EventEmitter {
   constructor() {
     super();// this is not allowed before super
-    this.data = {type:'SCROLL_BEGIN', direction:0};
+    this.data = {type: 'SCROLL_BEGIN', direction: 0};
     this.setMaxListeners(10);
   }
   get (key) {

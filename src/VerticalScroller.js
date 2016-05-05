@@ -18,9 +18,9 @@ export default class VerticalScroller {
     this.offset = 0;
     this.target = 0;
     this.touchPositions = [];
-    this._bindEvents();
+    this.bindEvents();
   }
-  _bindEvents (){
+  bindEvents (){
     // rebinding the event handler to this
     this.tap = this.tap.bind(this);
     this.drag = this.drag.bind(this);
@@ -58,7 +58,7 @@ export default class VerticalScroller {
   scroll (position){
     this.offset = position;
     this.scrollCallback(position);
-    ScrollStore.set ('type', 'on-scroll');
+    ScrollStore.set('type', 'on-scroll');
     // the direction will be set by the scroll start
     ScrollStore.emitChange('on-scroll');
   }
@@ -66,10 +66,10 @@ export default class VerticalScroller {
     let elapsed, delta, newOffset;
     if(this.amplitude){
       elapsed = Date.now() - this.timestamp;
-      delta = this.amplitude * Math.exp(-elapsed/SCROLLING_TIME_CONSTANT);
+      delta = this.amplitude * Math.exp(-elapsed / SCROLLING_TIME_CONSTANT);
       newOffset = this.target - delta;
       if (newOffset < this.minOffset) {
-        if (this.target - delta >= this.minOffset-2){
+        if (this.target - delta >= this.minOffset - 2){
             this.scroll(this.minOffset);
             return;
         }
@@ -90,23 +90,23 @@ export default class VerticalScroller {
     }
   }
   dispatchScrollEndEvent (){
-    ScrollStore.set ('type', 'scroll-end');
+    ScrollStore.set('type', 'scroll-end');
     ScrollStore.emitChange('scroll-end');
   }
   dispatchScrollStart (direction){
-    ScrollStore.set ('type', 'scroll-start');
-    ScrollStore.set ('direction', direction);
+    ScrollStore.set('type', 'scroll-start');
+    ScrollStore.set('direction', direction);
     ScrollStore.emitChange('scroll-start');
   }
   bounce (top){
     const finalDestination = top ? this.minOffset : this.maxOffset,
         isBouncingBack = top && this.amplitude > 0 || !top && this.amplitude < 0;
 
-    if(this.amplitude == 0){
+    if(this.amplitude === 0){
       return;
     }
     const elapsed = Date.now() - this.timestamp;
-    const delta = this.amplitude * Math.exp(-elapsed / (this.target == finalDestination ? 125 : SCROLLING_TIME_CONSTANT) );
+    const delta = this.amplitude * Math.exp(-elapsed / (this.target === finalDestination ? 125 : SCROLLING_TIME_CONSTANT) );
     if ( isBouncingBack && Math.abs(delta) < 2 ) {
         this.scroll(top ? this.minOffset : this.maxOffset);
         this.dispatchScrollEndEvent();
@@ -115,7 +115,7 @@ export default class VerticalScroller {
     this.scroll(this.target - delta);
 
     if (isBouncingBack) {
-      if (this.target != finalDestination) {
+      if (this.target !== finalDestination) {
           this.target = finalDestination;
           this.amplitude = this.target - this.offset;
           this.timestamp = new Date();
@@ -180,7 +180,7 @@ export default class VerticalScroller {
     const elapsed = this.touchPositions[endPos].timestamp - (this.touchPositions[startPos] && this.touchPositions[startPos].timestamp) || 0;
     const delta = this.touchPositions[endPos].offset - (this.touchPositions[startPos] && this.touchPositions[startPos].offset) || 0;
     const v = -1000 * delta / (1 + elapsed);
-    this.dispatchScrollStart(delta>0 ? 1:-1);
+    this.dispatchScrollStart(delta > 0 ? 1 : -1);
 
     this.velocity = 0.8 * v + 0.2 * this.velocity;
     this.amplitude = 1.0 * this.velocity;
