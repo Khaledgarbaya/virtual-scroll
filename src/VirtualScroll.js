@@ -51,7 +51,7 @@ export default class VirtualScroll {
     this.rmNodeInterval = setInterval(this.remoDirtyNodes.bind(this), 300);
     this.bindEvents();
   }
-  remoDirtyNodes(){
+  remoDirtyNodes (){
     if (Date.now() - this.lastScrolled > 100) {
       let badNodes = this.rootElement.querySelectorAll('[data-rm="1"]');
       for (let i = 0, l = badNodes.length; i < l; i++) {
@@ -63,11 +63,11 @@ export default class VirtualScroll {
     this.config.scroller.addEventListener('scroll-start', this.onScrollBegin.bind(this));
     this.config.scroller.addEventListener('scroll-end', this.onScrollEnd.bind(this));
   }
-  onScrollBegin(data){
+  onScrollBegin (data){
     this.info.isScrolling = true;
     this.info.direction = data.direction;
   }
-  onScrollEnd(){
+  onScrollEnd (){
     this.info.isScrolling = false;
   }
   setupContainer (){
@@ -125,7 +125,7 @@ export default class VirtualScroll {
       nodeItem.style.top = (index * this.itemHeight) + 'px';
     }
   }
-  scroll(position){
+  scroll (position){
     //Update top of the root element
     // translation is faster than chaning top
     // for more info: http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/

@@ -1,6 +1,6 @@
 import {EventEmitter} from 'events';
 class ScrollStore extends EventEmitter {
-  constructor() {
+  constructor () {
     super();// this is not allowed before super
     this.data = {type: 'SCROLL_BEGIN', direction: 0};
     this.setMaxListeners(10);
@@ -13,7 +13,7 @@ class ScrollStore extends EventEmitter {
     return (this.data[key] = value);
   }
 
-  emitChange(type){
+  emitChange (type){
     this.emit(type, this.data);
   }
 

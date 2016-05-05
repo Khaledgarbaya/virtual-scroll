@@ -75,8 +75,8 @@ describe('VirtualScroll', () => {
     });
   });
   describe('VirtualScroll required API properties',()=>{
-    vScroll._scroll(200);
-    it('should have scrollTop -200 if we call _scroll(200)', ()=>{
+    vScroll.scroll(200);
+    it('should have scrollTop -200 if we call scroll(200)', ()=>{
       expect(vScroll.info.scrollTop).to.equal(-200);
     });
     it('should have direction set to 1', ()=>{

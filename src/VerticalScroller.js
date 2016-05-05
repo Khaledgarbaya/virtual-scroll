@@ -2,7 +2,7 @@ import ScrollStore from './store/ScrollStore.js';
 const SCROLLING_TIME_CONSTANT = 525;
 
 export default class VerticalScroller {
-  constructor(scrollContainer, scrollCallback) {
+  constructor (scrollContainer, scrollCallback) {
     this.scrollContainer = scrollContainer;
     this.scrollCallback = scrollCallback;
 
@@ -191,7 +191,7 @@ export default class VerticalScroller {
     e.preventDefault && e.preventDefault();
     e.preventDefault && e.stopPropagation();
   }
-  scrollTo(y, animate){
+  scrollTo (y, animate){
     var maxAnimateDelta = 4000;
     if (animate) {
         if (y - this.offset > maxAnimateDelta) {
@@ -216,13 +216,13 @@ export default class VerticalScroller {
     this.minOffset = min;
     this.maxOffset = max;
   }
-  addEventListener(type, listener){
+  addEventListener (type, listener){
     ScrollStore.on(type, listener);
   }
-  removeEventListener(type, listener){
+  removeEventListener (type, listener){
     ScrollStore.removeListener(type, listener);
   }
-  removeAllListener(){
+  removeAllListener (){
     ScrollStore.removeAllListeners('scroll-end');
     ScrollStore.removeAllListeners('scroll-start');
     ScrollStore.removeAllListeners('on-scroll');
