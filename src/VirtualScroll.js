@@ -156,6 +156,7 @@ export default class VirtualScroll {
   }
   destroy (){
     this.config.scroller.destroy();
+    clearInterval(this.rmNodeInterval);
   }
   remove (){
     this.destroy();
@@ -168,13 +169,12 @@ export default class VirtualScroll {
     this.config.scroller.removeEventListener(event, callback);
   }
   scrollTop (/*duration*/){
-    // TODO addAnimation
+    // TODO implement me
   }
   scrollBottom (/*duration*/){
-    this.scroll(this.totalRows * this.itemHeight);
+    // TODO implement me
   }
-  scrollTo (position/*, duration*/){
-    // TODO add Animation with duration
-    this.scroll(position);
+  scrollTo (/*position, duration*/){
+    // TODO implement me
   }
 }

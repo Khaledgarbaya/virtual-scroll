@@ -45,6 +45,8 @@ export default class VerticalScroller {
       this.scrollContainer.removeEventListener('mouseup', this.release);
     }
     this.removeAllListener();
+    this.scrollContainer = null;
+    this.scrollCallback = null;
   }
   // check what type of event we received and get the right position out of it
   getYPosition (e){
@@ -139,7 +141,7 @@ export default class VerticalScroller {
     this.timestamp = Date.now();
     this.recordTouches(e);
     e.preventDefault && e.preventDefault();
-    e.preventDefault && e.stopPropagation();
+    e.stopPropagation && e.stopPropagation();
   }
   drag (e){
     let y, delta, scaleFactor = this.offset < this.minOffset || this.offset > this.maxOffset ? 0.5 : 1;
@@ -153,7 +155,7 @@ export default class VerticalScroller {
       }
     }
     e.preventDefault && e.preventDefault();
-    e.preventDefault && e.stopPropagation();
+    e.stopPropagation && e.stopPropagation();
   }
   recordTouches (e){
     let touches = e.touches || [{pageX: e.pageX, pageY: e.pageY}],
@@ -189,7 +191,7 @@ export default class VerticalScroller {
     requestAnimationFrame(this.autoScroll.bind(this));
 
     e.preventDefault && e.preventDefault();
-    e.preventDefault && e.stopPropagation();
+    e.stopPropagation && e.stopPropagation();
   }
   scrollTo (y, animate){
     var maxAnimateDelta = 4000;
