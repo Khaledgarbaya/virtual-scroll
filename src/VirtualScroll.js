@@ -43,7 +43,8 @@ export default class VirtualScroll {
     this.renderChunk(this.rootElement, 0);
     this.scrollerElement = this.createScroller(this.totalRows * this.itemHeight);
     this.info.height = this.totalRows * this.itemHeight;// estimated for now
-    this.config.scroller.setDimensions(0, this.info.height);
+    const bottom = this.info.height - ((this.visibleItemsCount - 1) * this.itemHeight)
+    this.config.scroller.setDimensions(0, bottom);
     this.rootElement.appendChild(this.scrollerElement);
     this.lastRepaintY = 0;
     this.maxBuffer = this.visibleItemsCount * this.itemHeight;
@@ -149,6 +150,8 @@ export default class VirtualScroll {
   refresh (){
     this.setupContainer();
     this.renderChunk(this.rootElement, 0);
+    const bottom = (this.itemHeight * this.totalRows) - ((this.visibleItemsCount - 1) * this.itemHeight)
+    this.config.scroller.setDimensions(0, bottom);
   }
   setSource (listSource){
     this.config.source = listSource;
@@ -168,13 +171,14 @@ export default class VirtualScroll {
   removeEventListener (event, callback){
     this.config.scroller.removeEventListener(event, callback);
   }
-  scrollTop (/*duration*/){
-    // TODO implement me
+  scrollTop (duration){
+    this.config.scroller.scrollTo(0, duration!==0 , duration);
   }
-  scrollBottom (/*duration*/){
-    // TODO implement me
+  scrollBottom (duration){
+    const bottom = (this.itemHeight * this.totalRows) - ((this.visibleItemsCount - 1) * this.itemHeight)
+    this.config.scroller.scrollTo(bottom, duration!==0 , duration);
   }
-  scrollTo (/*position, duration*/){
-    // TODO implement me
+  scrollTo (position, duration){
+    this.config.scroller.scrollTo(position, duration!==0 , duration);
   }
 }

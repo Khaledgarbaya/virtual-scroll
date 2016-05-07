@@ -193,8 +193,8 @@ export default class VerticalScroller {
     e.preventDefault && e.preventDefault();
     e.stopPropagation && e.stopPropagation();
   }
-  scrollTo (y, animate){
-    var maxAnimateDelta = 4000;
+  scrollTo (y, animate, duration){
+    var maxAnimateDelta = duration || 4000;
     if (animate) {
         if (y - this.offset > maxAnimateDelta) {
             this.offset = y - maxAnimateDelta;
@@ -205,7 +205,7 @@ export default class VerticalScroller {
         this.amplitude = y - this.offset;
         this.target = y;
         this.timestamp = Date.now();
-        requestAnimationFrame(this.autoScroll);
+        requestAnimationFrame(this.autoScroll.bind(this));
     } else {
         this.amplitude = 0;
         this.scroll(y);
