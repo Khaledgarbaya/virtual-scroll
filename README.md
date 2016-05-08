@@ -1,5 +1,8 @@
 Virtual Scroll
 =========================
+
+[![Build Status](https://travis-ci.org/Khaledgarbaya/virtual-scroll.svg?branch=master)](https://travis-ci.org/Khaledgarbaya/virtual-scroll)
+
 ```
             _    ___      __              __   _____                 ____
             | |  / (_)____/ /___  ______ _/ /  / ___/______________  / / /
@@ -70,5 +73,4 @@ let virtualScroll1 = new VirtualScroll({
 * More Unit tests
 * Adding Scrolling using mouse wheel
 * Adding e2e tests
-* CI using Travis CI
 * handling images (only load the visible items)
