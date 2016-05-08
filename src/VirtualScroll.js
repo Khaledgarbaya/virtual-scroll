@@ -131,6 +131,8 @@ export default class VirtualScroll {
     // translation is faster than chaning top
     // for more info: http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
     this.info.scrollTop = -position;
+    // translateZ(0) is to trick the browser to use the GPU for the animation
+    // so we end up with smoother animation
     let t = 'translateY(' + (-position) + 'px) translateZ(0)';
     let s = this.rootElement.style;
     s['transform'] = t;
