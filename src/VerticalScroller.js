@@ -182,6 +182,7 @@ export default class VerticalScroller {
     const elapsed = this.touchPositions[endPos].timestamp - (this.touchPositions[startPos] && this.touchPositions[startPos].timestamp) || 0;
     const delta = this.touchPositions[endPos].offset - (this.touchPositions[startPos] && this.touchPositions[startPos].offset) || 0;
     const v = -1000 * delta / (1 + elapsed);
+
     this.dispatchScrollStart(delta > 0 ? 1 : -1);
 
     this.velocity = 0.8 * v + 0.2 * this.velocity;

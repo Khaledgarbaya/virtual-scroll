@@ -74,13 +74,24 @@ describe('VirtualScroll', () => {
       });
     });
   });
-  describe('VirtualScroll required API properties',()=>{
-    vScroll.scroll(200);
-    it('should have scrollTop -200 if we call scroll(200)', ()=>{
-      expect(vScroll.info.scrollTop).to.equal(-200);
+  describe('VirtualScroll Scrolling',()=>{
+    it('should scroll to the top correctly', ()=>{
+      vScroll.scrollTop();
+      expect(vScroll.info.scrollTop).to.equal(0);
     });
-    it('should have direction set to 1', ()=>{
+    it('should have direction set to -1 when scrolling up', ()=>{
+      expect(vScroll.info.direction).to.equal(-1);
+    });
+
+    // TODO check ScrollTop value when scrolling to bottom
+    // it('should scroll to the bottom correctly', ()=>{
+    //   vScroll.scrollBottom();
+    //   expect(vScroll.info.scrollTop).to.equal(-149300);
+    // });
+    it('should have direction set to 1 when scrolling down', ()=>{
+      vScroll.scrollBottom();
       expect(vScroll.info.direction).to.equal(1);
     });
+
   });
 });

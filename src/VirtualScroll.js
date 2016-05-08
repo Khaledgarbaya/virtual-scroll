@@ -172,13 +172,22 @@ export default class VirtualScroll {
     this.config.scroller.removeEventListener(event, callback);
   }
   scrollTop (duration){
-    this.config.scroller.scrollTo(0, duration!==0 , duration);
+    this.info.direction = -1;
+    const animate = (duration && duration !== 0);
+    this.config.scroller.dispatchScrollStart(this.info.direction);
+    this.config.scroller.scrollTo(0, animate, duration);
   }
   scrollBottom (duration){
+    this.info.direction = 1;
     const bottom = (this.itemHeight * this.totalRows) - ((this.visibleItemsCount - 1) * this.itemHeight)
-    this.config.scroller.scrollTo(bottom, duration!==0 , duration);
+    const animate = (duration && duration !== 0);
+    this.config.scroller.dispatchScrollStart(this.info.direction);
+    this.config.scroller.scrollTo(bottom, animate, duration);
   }
   scrollTo (position, duration){
-    this.config.scroller.scrollTo(position, duration!==0 , duration);
+    this.info.direction = position > this.info.scrollTop ? -1 : 1;
+    const animate = (duration && duration !== 0);
+    this.config.scroller.dispatchScrollStart(this.info.direction);
+    this.config.scroller.scrollTo(position, animate, duration);
   }
 }
