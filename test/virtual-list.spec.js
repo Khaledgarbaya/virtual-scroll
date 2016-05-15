@@ -7,7 +7,20 @@ import VirtualScroll from '../src/VirtualScroll.js';
   - Test your code.
 */
 describe('VirtualScroll', () => {
-  const vScroll = new VirtualScroll();
+  let listSource = [];
+  for (let i = 0; i < 3000; i++) listSource.push({ itemId: i });
+  let root = document.createElement('div');
+  root.style.width  = "400px";
+  root.style.height = "700px";
+  root.offsetHeight = 700;
+  root.offsewidth = 400;
+
+  const vScroll = new VirtualScroll({
+    itemHeight: 50,
+    root: root,
+    // ARRAY containg all the objects to be displayed inside the list
+    source: listSource
+  });
   describe('initial state', ()=>{
     it('vScroll is instannce of VirtualScroll', ()=>{
       expect(vScroll).to.be.an.instanceof(VirtualScroll);
@@ -83,11 +96,17 @@ describe('VirtualScroll', () => {
       expect(vScroll.info.direction).to.equal(-1);
     });
 
-    // TODO check ScrollTop value when scrolling to bottom
-    // it('should scroll to the bottom correctly', ()=>{
-    //   vScroll.scrollBottom();
-    //   expect(vScroll.info.scrollTop).to.equal(-149300);
-    // });
+
+    it('should scroll to specific position correctly', ()=>{
+      vScroll.scrollTo(200);
+      expect(vScroll.info.scrollTop).to.equal(-200);
+    });
+
+    it('should scroll to the bottom correctly', ()=>{
+      vScroll.scrollBottom();
+      expect(vScroll.info.scrollTop).to.equal(-149350);
+    });
+
     it('should have direction set to 1 when scrolling down', ()=>{
       vScroll.scrollBottom();
       expect(vScroll.info.direction).to.equal(1);

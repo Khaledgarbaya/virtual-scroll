@@ -25,9 +25,9 @@ export default class VirtualScroll {
     this.config = {};
     this.info = {scrollTop: 0, direction: 1, height: 1, isScrolling: false};
     this.config.root = (config && config.root) ? config.root : document.createElement('div');
-    this.config.source = (config && config.root) ? config.source : [];
-    this.config.createItemFn = (config && config.root) ? config.createItemFn : null;
-    this.config.updateItemFn = (config && config.root) ? config.updateItemFn : null;
+    this.config.source = (config && config.source) ? config.source : [];
+    this.config.createItemFn = (config && config.createItemFn) ? config.createItemFn : null;
+    this.config.updateItemFn = (config && config.updateItemFn) ? config.updateItemFn : null;
     this.rootElement = null;
     // setup the container
 
@@ -131,6 +131,7 @@ export default class VirtualScroll {
     // translation is faster than chaning top
     // for more info: http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
     this.info.scrollTop = -position;
+
     // translateZ(0) is to trick the browser to use the GPU for the animation
     // so we end up with smoother animation
     let t = 'translateY(' + (-position) + 'px) translateZ(0)';
@@ -174,17 +175,14 @@ export default class VirtualScroll {
     this.config.scroller.removeEventListener(event, callback);
   }
   scrollTop (duration){
+    this.scrollTo(0, duration);
     this.info.direction = -1;
-    const animate = (duration && duration !== 0);
-    this.config.scroller.dispatchScrollStart(this.info.direction);
-    this.config.scroller.scrollTo(0, animate, duration);
   }
   scrollBottom (duration){
+    const bottom = (this.itemHeight * this.totalRows) - ((this.visibleItemsCount - 1) * this.itemHeight);
+    this.scrollTo(bottom, duration);
     this.info.direction = 1;
-    const bottom = (this.itemHeight * this.totalRows) - ((this.visibleItemsCount - 1) * this.itemHeight)
-    const animate = (duration && duration !== 0);
-    this.config.scroller.dispatchScrollStart(this.info.direction);
-    this.config.scroller.scrollTo(bottom, animate, duration);
+    this.info.scrollTop = -bottom;
   }
   scrollTo (position, duration){
     this.info.direction = position > this.info.scrollTop ? -1 : 1;
