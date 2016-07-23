@@ -7,10 +7,7 @@ cache:
 notifications:
   email: false
 node_js:
-  - "6.2"
-  - "5.11"
-  - "4.4"
-  - "0.10"
+  - "5.9.1"
 script:
   - npm run test
   - npm build:umd
@@ -19,6 +16,8 @@ before_install:
   - npm set progress=false
 before_script:
   - npm install
+  - npm run clean
+  - npm run build
 after_success:
   - 'curl -Lo travis_after_all.py https://git.io/travis_after_all'
   - python travis_after_all.py
