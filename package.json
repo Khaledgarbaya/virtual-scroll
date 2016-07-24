@@ -1,5 +1,6 @@
 {
-  "name": "virtual-scroll",
+  "name": "virtual-scroll-list",
+  "version":"0.7.0",
   "description": "Think of it as UITableView for the DOM elements",
   "main": "webpack.config.js",
   "scripts": {
