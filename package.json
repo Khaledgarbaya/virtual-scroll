@@ -23,9 +23,6 @@
   ],
   "author": "Khaled Garbaya <kgarbaya@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "haha no"
-  },
   "devDependencies": {
     "babel-cli": "^6.4.0",
     "babel-core": "^6.3.17",

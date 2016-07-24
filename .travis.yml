@@ -1,3 +1,4 @@
+sudo: false
 before_install:
   - npm install -g npm@latest
 language: node_js
@@ -7,6 +8,9 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+env:
+  global:
+    - CXX=g++-4.8
 node_js:
   - "0.10"
   - "3.3"
