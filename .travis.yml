@@ -1,5 +1,6 @@
 dist: trusty
 before_install:
+  - rm -rf node_modules
   - npm install -g npm@latest
   - npm set progress=false
 language: node_js
