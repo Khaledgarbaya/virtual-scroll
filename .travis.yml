@@ -11,11 +11,6 @@ addons:
 env:
   global:
     - CXX=g++-4.8
-node_js:
-  - "0.10"
-  - "3.3"
-  - "4.2"
-  - "5.0"
 script:
   - npm run test
 after_success:
