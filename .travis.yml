@@ -1,6 +1,12 @@
 before_install:
   - npm install -g npm@latest
 language: node_js
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 node_js:
   - "0.10"
   - "3.3"
