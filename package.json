@@ -3,8 +3,10 @@
   "description": "Think of it as UITableView for the DOM elements",
   "main": "webpack.config.js",
   "scripts": {
-    "clean": "rimraf lib dist",
-    "build": "babel src --out-dir lib",
+    "prepublish": "in-publish && npm run build || not-in-publish",
+    "postpublish": "npm run clean",
+    "clean": "rimraf dist",
+    "build": "npm run clean && mkdirp dist && babel src --out-dir dist",
     "build:umd": "webpack src/VirtualScroll.js dist/virtual-scroll.js && NODE_ENV=production webpack src/VirtualScroll.js dist/virtual-scroll.min.js",
     "lint": "eslint src",
     "test": "NODE_ENV=test mocha --compilers js:babel-register",
@@ -38,16 +40,17 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^2.1.0",
     "expect": "^1.6.0",
+    "in-publish": "^2.0.0",
     "isparta": "^3.0.3",
     "mocha": "^2.3.4",
     "mock-browser": "^0.92.11",
     "rimraf": "^2.5.2",
+    "semantic-release": "^4.3.5",
     "semantic-release-cli": "^1.4.1",
     "webpack": "^1.9.6",
-    "webpack-dev-server": "^1.8.2",
-    "semantic-release": "^4.3.5"
+    "webpack-dev-server": "^1.8.2"
   },
-  "files":[
+  "files": [
     "dist"
   ],
   "dependencies": {
