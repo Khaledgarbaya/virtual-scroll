@@ -46,7 +46,7 @@
     "semantic-release": "^6.3.2",
     "semantic-release-cli": "^3.0.0",
     "webpack": "^1.9.6",
-    "webpack-dev-server": "^1.8.2"
+    "webpack-dev-server": "^2.3.0"
   },
   "files": [
     "dist"
