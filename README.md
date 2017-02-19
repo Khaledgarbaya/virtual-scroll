@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Khaledgarbaya/virtual-scroll.svg?branch=master)](https://travis-ci.org/Khaledgarbaya/virtual-scroll)
-
+[![npm version](https://badge.fury.io/js/virtual-scroll-list.svg)](https://badge.fury.io/js/virtual-scroll-list)
 ```
             _    ___      __              __   _____                 ____
             | |  / (_)____/ /___  ______ _/ /  / ___/______________  / / /
