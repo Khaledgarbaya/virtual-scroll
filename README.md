@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/Khaledgarbaya/virtual-scroll.svg?branch=master)](https://travis-ci.org/Khaledgarbaya/virtual-scroll)
-[![npm version](https://badge.fury.io/js/virtual-scroll-list.svg)](https://badge.fury.io/js/virtual-scroll-list)
 ```
             _    ___      __              __   _____                 ____
             | |  / (_)____/ /___  ______ _/ /  / ___/______________  / / /
@@ -8,6 +6,10 @@
             |___/_/_/   \__/\__,_/\__,_/_/   /____/\___/_/   \____/_/_/
 
 ```
+
+[![Build Status](https://travis-ci.org/Khaledgarbaya/virtual-scroll.svg?branch=master)](https://travis-ci.org/Khaledgarbaya/virtual-scroll)
+[![npm version](https://badge.fury.io/js/virtual-scroll-list.svg)](https://badge.fury.io/js/virtual-scroll-list)
+
 Virtual list that is able to render infinite ammount of DOm element using UITableView techniques and. This is already been done in a lot of ways but Here I am trying to use CSS translate to scroll the container which more performant than changing the top.
 Paul Irish made a great benchmark here http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
 
