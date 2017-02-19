@@ -71,10 +71,4 @@ let virtualScroll1 = new VirtualScroll({
 });
 
 ```
-## Improvement/TODO
 
-* Documentation
-* More Unit tests
-* Adding Scrolling using mouse wheel
-* Adding e2e tests
-* handling images (only load the visible items)
