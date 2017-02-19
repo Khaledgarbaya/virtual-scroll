@@ -1,6 +1,3 @@
-Virtual Scroll
-=========================
-
 [![Build Status](https://travis-ci.org/Khaledgarbaya/virtual-scroll.svg?branch=master)](https://travis-ci.org/Khaledgarbaya/virtual-scroll)
 
 ```
