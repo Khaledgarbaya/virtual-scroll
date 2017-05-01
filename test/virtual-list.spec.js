@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {JSDOM} from 'jsdom'
 import VirtualScroll from '../src/VirtualScroll.js';
 /*
   Mama always says three things:
@@ -7,9 +8,11 @@ import VirtualScroll from '../src/VirtualScroll.js';
   - Test your code.
 */
 describe('VirtualScroll', () => {
+  const jsdom = new JSDOM('<!DOCTYPE html>')
+  global.document = jsdom.window.document;
   let listSource = [];
   for (let i = 0; i < 3000; i++) listSource.push({ itemId: i });
-  let root = {style:{}, appendChild: function (child) {}};
+  let root = {appendChild: function (){}, style:{}}
   root.style.width  = "400px";
   root.style.height = "700px";
   root.offsetHeight = 700;
