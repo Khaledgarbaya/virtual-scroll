@@ -9,7 +9,7 @@ import VirtualScroll from '../src/VirtualScroll.js';
 describe('VirtualScroll', () => {
   let listSource = [];
   for (let i = 0; i < 3000; i++) listSource.push({ itemId: i });
-  let root = document.createElement('div');
+  let root = {style:{}, appendChild: function (child) {}};
   root.style.width  = "400px";
   root.style.height = "700px";
   root.offsetHeight = 700;
