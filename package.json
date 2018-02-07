@@ -37,7 +37,7 @@
     "cz-conventional-changelog": "2.0.0",
     "eslint": "^3.10.0",
     "eslint-config-airbnb": "^14.1.0",
-    "expect": "^1.6.0",
+    "expect": "^22.2.0",
     "in-publish": "^2.0.0",
     "isparta": "^4.0.0",
     "jsdom": "^10.1.0",
