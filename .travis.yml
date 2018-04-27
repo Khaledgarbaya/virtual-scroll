@@ -16,6 +16,7 @@ node_js:
   - "6"
   - "5.7"
   - "4.3"
+  - "10"
 script:
   - npm run test
 after_success:
