@@ -49,7 +49,7 @@
     "rimraf": "^2.5.2",
     "semantic-release": "^6.3.2",
     "semantic-release-cli": "^3.0.0",
-    "webpack": "^2.3.0",
+    "webpack": "^4.16.5",
     "webpack-dev-server": "^2.3.0"
   },
   "files": [
